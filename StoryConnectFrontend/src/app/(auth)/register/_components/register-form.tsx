@@ -29,6 +29,8 @@ export function RegisterForm() {
           type="email"
           placeholder="you@example.com"
           autoComplete="email"
+          autoCapitalize="none"
+          spellCheck={false}
           maxLength={256}
           required
         />

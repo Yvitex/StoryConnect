@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using StoryConnectBackend.Data;
 using StoryConnectBackend.Email;
 
+const string FrontendCorsPolicy = "Frontend";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -60,6 +62,15 @@ builder.Services.AddRateLimiter(options =>
             }));
 });
 
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+
+builder.Services.AddCors(options =>
+    options.AddPolicy(FrontendCorsPolicy, policy => policy
+        .WithOrigins(allowedOrigins)
+        .WithMethods("GET", "POST", "PUT", "PATCH", "DELETE")
+        .WithHeaders("Content-Type", "Authorization")
+        .AllowCredentials()));
+
 builder.Services.AddScoped<IEmailSender, ConsoleEmailSender>();
 
 builder.Services.AddControllers();
@@ -75,6 +86,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(FrontendCorsPolicy);
 
 app.UseRateLimiter();
 

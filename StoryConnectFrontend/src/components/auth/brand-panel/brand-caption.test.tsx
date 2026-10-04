@@ -3,16 +3,12 @@ import { describe, expect, it } from "vitest";
 import { BrandCaption } from "./brand-caption";
 
 describe("BrandCaption", () => {
-  it("renders_default_renders_headline_and_supporting_text", () => {
-    render(<BrandCaption />);
+  it("render_withProps_rendersTitleAndDescription", () => {
+    render(<BrandCaption title="A headline" description="Some supporting text" />);
 
     expect(
-      screen.getByRole("heading", {
-        name: "Every scene, character, and secret — connected.",
-      }),
+      screen.getByRole("heading", { name: "A headline" }),
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(/watch the story take shape/i),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Some supporting text")).toBeInTheDocument();
   });
 });

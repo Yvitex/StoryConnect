@@ -1,8 +1,5 @@
-import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
-
-const LINK_CLASSES =
-  "text-ink underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-accent";
+import { TextLink } from "@/components/ui/text-link";
 
 export function TermsAgreement() {
   return (
@@ -13,13 +10,13 @@ export function TermsAgreement() {
         label={
           <span>
             I agree to the{" "}
-            <Link href="/terms" className={LINK_CLASSES}>
+            <TextLink href="/terms" tone="ink">
               Terms
-            </Link>{" "}
+            </TextLink>{" "}
             and{" "}
-            <Link href="/privacy" className={LINK_CLASSES}>
+            <TextLink href="/privacy" tone="ink">
               Privacy Policy
-            </Link>
+            </TextLink>
           </span>
         }
       />

@@ -3,12 +3,13 @@ import { BrandPanel } from "@/components/auth/brand-panel/brand-panel";
 
 type Props = {
   children: ReactNode;
+  caption: ReactNode;
 };
 
-export default function AuthLayout({ children }: Props) {
+export default function AuthLayout({ children, caption }: Props) {
   return (
     <main className="grid min-h-screen flex-1 xl:grid-cols-2">
-      <BrandPanel />
+      <BrandPanel caption={caption} />
       {children}
     </main>
   );

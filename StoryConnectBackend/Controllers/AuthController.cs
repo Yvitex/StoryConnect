@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
-using StoryConnectBackend.Contracts.Auth;
+using StoryConnectBackend.Contracts;
 using StoryConnectBackend.Email;
 
 namespace StoryConnectBackend.Controllers;
