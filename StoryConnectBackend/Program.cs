@@ -1,7 +1,9 @@
+using System.ComponentModel;
 using System.Security.Claims;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StoryConnectBackend.Auth;
 using StoryConnectBackend.Data;
 using StoryConnectBackend.Email;
 
@@ -32,6 +34,17 @@ builder.Services.ConfigureApplicationCookie(options =>
         return Task.CompletedTask;
     };
 });
+
+builder.Services.AddOptions<JwtOptions>()
+    .BindConfiguration(JwtOptions.SectionName)
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+
+builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton<JwtSigningKey>();
+builder.Services.AddSingleton<AccessTokenIssuer>();
+
 
 builder.Services.AddRateLimiter(options =>
 {
