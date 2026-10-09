@@ -5,4 +5,13 @@ Content-Type: application/json
 
 { "email": "test@example.com", "password": "Passw0rd!" }
 
-###
+### Me without a token (expect 401)
+GET {{StoryConnectBackend_HostAddress}}/api/auth/me
+
+### Me with a garbage token (expect 401)
+GET {{StoryConnectBackend_HostAddress}}/api/auth/me
+Authorization: Bearer not.a.jwt
+
+
+### OpenAPI endpoint 
+GET {{StoryConnectBackend_HostAddress}}/openapi/v1.json
